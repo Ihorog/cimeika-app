@@ -1,0 +1,10 @@
+sdk: docker
+repository: Ihorog/cimeika_gifhub
+title: Cimeika Project
+emoji: 🚀
+colorFrom: blue
+colorTo: green
+pinned: false
+license: mit
+app_port: 8000
+dockerfile_path: Dockerfile
