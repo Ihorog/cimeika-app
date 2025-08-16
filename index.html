@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cimeika</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="pages/home.html">Home</a></li>
+                <li><a href="pages/event.html">Event</a></li>
+                <li><a href="pages/gallery.html">Gallery</a></li>
+                <li><a href="pages/mood.html">Mood</a></li>
+                <li><a href="pages/child.html">Child</a></li>
+                <li><a href="pages/calendar.html">Calendar</a></li>
+                <li><a href="pages/ci.html">Ci</a></li>
+                <li><a href="pages/podia.html">ПоДія</a></li>
+                <li><a href="pages/nastiy.html">Настрій</a></li>
+                <li><a href="pages/mala.html">Маля</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to Cimeika</h1>
+        <p>Your journey to a connected and intelligent life starts here.</p>
+        <img src="Podija.jpg" alt="Character ПоДія">
+        <button onclick="startJourney()">Start Journey</button>
+        <section class="real-time-data">
+            <h2>Real-Time Data</h2>
+            <div id="weather">
+                <h3>Weather</h3>
+                <p id="weather-data">Loading...</p>
+            </div>
+            <div id="time">
+                <h3>Time</h3>
+                <p id="time-data">Loading...</p>
+            </div>
+            <div id="astrology">
+                <h3>Astrological Forecast</h3>
+                <p id="astrology-data">Loading...</p>
+            </div>
+            <div id="mood">
+                <h3>Mood</h3>
+                <p id="mood-data">Loading...</p>
+            </div>
+            <div id="events">
+                <h3>Events</h3>
+                <p id="events-data">Loading...</p>
+            </div>
+            <div id="creativity">
+                <h3>Creativity</h3>
+                <p id="creativity-data">Loading...</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
