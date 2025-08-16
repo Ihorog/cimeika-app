@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="calendar-section">
+            <h1>Manage Your Time with Cimeika</h1>
+            <div id="calendar"></div>
+        </section>
+        <section class="upcoming-events">
+            <h2>My Events</h2>
+            <div id="upcoming-events-content">
+                <!-- Upcoming events will be dynamically loaded here -->
+            </div>
+        </section>
+        <section class="event-filters">
+            <h2>Filter Events</h2>
+            <form>
+                <label for="event-category">Category:</label>
+                <select id="event-category" name="event-category">
+                    <option value="all">All</option>
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="family">Family</option>
+                </select>
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" name="event-date">
+                <button type="submit">Apply Filters</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
