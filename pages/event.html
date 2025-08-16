@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="event-banner">
+            <h1>Plan Your Events with Cimeika</h1>
+            <p>Organize your events and tasks effortlessly with our interactive calendar and recommendations from Ci.</p>
+        </section>
+        <section class="interactive-calendar">
+            <h2>Interactive Calendar</h2>
+            <div id="calendar"></div>
+            <button onclick="addEvent()">Add Event</button>
+        </section>
+        <section class="add-event-form" id="add-event-form" style="display: none;">
+            <h2>Add New Event</h2>
+            <form>
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" name="event-name" required>
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" name="event-date" required>
+                <label for="event-location">Location:</label>
+                <input type="text" id="event-location" name="event-location" required>
+                <label for="event-notes">Additional Notes:</label>
+                <textarea id="event-notes" name="event-notes"></textarea>
+                <button type="submit">Save Event</button>
+            </form>
+        </section>
+        <section class="ci-recommendations">
+            <h2>Recommendations from Ci</h2>
+            <div id="ci-recommendations-content">
+                <!-- Recommendations will be dynamically loaded here -->
+            </div>
+        </section>
+        <section class="telegram-integration">
+            <h2>Telegram Integration</h2>
+            <p>Interact with our event planning assistant directly through Telegram. Use the following commands:</p>
+            <ul>
+                <li><strong>/create_event</strong> - Create a new event</li>
+                <li><strong>/view_events</strong> - View your upcoming events</li>
+                <li><strong>/delete_event</strong> - Delete an event</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
