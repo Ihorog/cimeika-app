@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="gallery-categories">
+            <h1>Gallery Categories</h1>
+            <div class="category-tile">
+                <a href="#">
+                    <img src="../images/family.png" alt="Family">
+                    <h2>Family</h2>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="#">
+                    <img src="../images/creativity.png" alt="Creativity">
+                    <h2>Creativity</h2>
+                </a>
+            </div>
+            <div class="category-tile">
+                <a href="#">
+                    <img src="../images/events.png" alt="Events">
+                    <h2>Events</h2>
+                </a>
+            </div>
+        </section>
+        <section class="image-filters">
+            <h2>Filters</h2>
+            <div class="filter-panel">
+                <label for="category-filter">Category:</label>
+                <select id="category-filter">
+                    <option value="all">All</option>
+                    <option value="family">Family</option>
+                    <option value="creativity">Creativity</option>
+                    <option value="events">Events</option>
+                </select>
+                <label for="tag-filter">Tags:</label>
+                <input type="text" id="tag-filter" placeholder="Enter tags">
+                <label for="date-filter">Date:</label>
+                <input type="date" id="date-filter">
+                <button onclick="applyFilters()">Apply Filters</button>
+            </div>
+        </section>
+        <section class="recent-images">
+            <h2>Recent Images</h2>
+            <div class="image-tile">
+                <img src="../images/recent1.png" alt="Recent Image 1">
+            </div>
+            <div class="image-tile">
+                <img src="../images/recent2.png" alt="Recent Image 2">
+            </div>
+            <div class="image-tile">
+                <img src="../images/recent3.png" alt="Recent Image 3">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
