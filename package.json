@@ -1,0 +1,33 @@
+{
+  "name": "organizu-clone",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8000",
+    "build": "next build",
+    "start": "next start -p 8000",
+    "orchestra:start": "./cimeika-orchestra.sh start",
+    "orchestra:status": "./cimeika-orchestra.sh status",
+    "orchestra:stop": "./cimeika-orchestra.sh stop",
+    "orchestra:monitor": "./cimeika-orchestra.sh monitor",
+    "orchestra:rollback": "./cimeika-orchestra.sh rollback",
+    "orchestra:section": "./cimeika-orchestra.sh section",
+    "orchestra:cleanup": "./cimeika-orchestra.sh cleanup",
+    "deploy": "npm run orchestra:start",
+    "deploy:status": "npm run orchestra:status",
+    "deploy:monitor": "npm run orchestra:monitor"
+  },
+  "dependencies": {
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "next": "^13.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
+  }
+}
