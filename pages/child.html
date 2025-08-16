@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Creativity - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="child-creativity">
+            <h1>Child Creativity</h1>
+            <div class="interactive-tasks">
+                <h2>Interactive Tasks</h2>
+                <div class="task">
+                    <h3>Draw Your Favorite Animal</h3>
+                    <p>Use your creativity to draw your favorite animal and share it with your family.</p>
+                </div>
+                <div class="task">
+                    <h3>Create a Creative Collage</h3>
+                    <p>Gather different materials and create a unique collage. Let your imagination run wild!</p>
+                </div>
+                <div class="task">
+                    <h3>Build a Lego Structure</h3>
+                    <p>Use Lego blocks to build a structure of your choice and share it with your friends.</p>
+                </div>
+            </div>
+            <div class="games">
+                <h2>Games</h2>
+                <div class="game">
+                    <h3>Memory Game</h3>
+                    <p>Test your memory with this fun and interactive game.</p>
+                </div>
+                <div class="game">
+                    <h3>Puzzle Game</h3>
+                    <p>Solve puzzles and improve your problem-solving skills.</p>
+                </div>
+                <div class="game">
+                    <h3>Math Challenge</h3>
+                    <p>Challenge yourself with fun math problems and improve your skills.</p>
+                </div>
+            </div>
+            <div class="drawings">
+                <h2>Drawings</h2>
+                <div class="drawing">
+                    <h3>Upload Your Drawing</h3>
+                    <p>Upload your drawing directly to the gallery or share it with your family through the Telegram bot.</p>
+                </div>
+                <div class="drawing">
+                    <h3>Upload Your Creative Work</h3>
+                    <p>Upload your creative work to Dropbox and share it with your friends and family.</p>
+                    <form id="uploadCreativeWorkForm">
+                        <input type="file" id="creativeWorkFile" name="creativeWorkFile" required>
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+            </div>
+            <div class="personal-gallery">
+                <h2>My Gallery</h2>
+                <p>Save and organize your creative works in your personal gallery.</p>
+                <div id="personalGallery">
+                    <!-- Personal gallery content will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
