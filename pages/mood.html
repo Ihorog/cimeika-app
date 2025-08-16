@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="mood-chart">
+            <h1>Mood Tracker</h1>
+            <canvas id="moodChart"></canvas>
+        </section>
+        <section class="mood-exercises">
+            <h2>Exercises and Tips</h2>
+            <div class="exercise-card">
+                <h3>Meditation</h3>
+                <p>Take a few minutes to meditate and clear your mind.</p>
+            </div>
+            <div class="exercise-card">
+                <h3>Relaxation</h3>
+                <p>Practice deep breathing exercises to relax your body.</p>
+            </div>
+            <div class="exercise-card">
+                <h3>Positive Thinking</h3>
+                <p>Write down three things you are grateful for today.</p>
+            </div>
+        </section>
+        <section class="update-mood">
+            <h2>Update Your Mood</h2>
+            <form id="updateMoodForm">
+                <label for="currentMood">Current Mood:</label>
+                <select id="currentMood" name="currentMood">
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="stressed">Stressed</option>
+                    <option value="relaxed">Relaxed</option>
+                </select>
+                <button type="submit">Update Mood</button>
+            </form>
+        </section>
+        <section class="mood-analysis">
+            <h2>Mood Analysis and Recommendations</h2>
+            <div id="mood-analysis-content">
+                <!-- Mood analysis and recommendations will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        });
+    </script>
+</body>
+</html>
