@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cimeika</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../scripts.js" defer></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main>
+        <section class="welcome-banner">
+            <img src="../Podija.jpg" alt="Cimeika Logo">
+            <h1>Welcome to Cimeika</h1>
+            <p>Your journey to a connected and intelligent life starts here.</p>
+            <button onclick="startJourney()">Start Journey</button>
+        </section>
+        <section class="navigation-tiles">
+            <div class="tile">
+                <a href="event.html">
+                    <img src="../images/event.png" alt="Event">
+                    <h2>Event</h2>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="mood.html">
+                    <img src="../images/mood.png" alt="Mood">
+                    <h2>Mood</h2>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="child.html">
+                    <img src="../images/child.png" alt="Child">
+                    <h2>Child</h2>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="calendar.html">
+                    <img src="../images/calendar.png" alt="Calendar">
+                    <h2>Calendar</h2>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="gallery.html">
+                    <img src="../images/gallery.png" alt="Gallery">
+                    <h2>Gallery</h2>
+                </a>
+            </div>
+            <div class="tile">
+                <a href="ci.html">
+                    <img src="../images/ci.png" alt="Ci">
+                    <h2>Ci</h2>
+                </a>
+            </div>
+        </section>
+        <section class="real-time-data">
+            <h2>Real-Time Data</h2>
+            <div id="weather">
+                <h3>Weather</h3>
+                <p id="weather-data">Loading...</p>
+            </div>
+            <div id="time">
+                <h3>Time</h3>
+                <p id="time-data">Loading...</p>
+            </div>
+            <div id="astrology">
+                <h3>Astrological Forecast</h3>
+                <p id="astrology-data">Loading...</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Cimeika. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load the header
+            fetch('../components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Fetch and display real-time weather data
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=0dd0656884eea8329f4f432cc0bc8010')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('weather-data').textContent = `${data.weather[0].description}, ${data.main.temp}°C`;
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
+
+            // Fetch and display real-time time data
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('time-data').textContent = now.toLocaleTimeString();
+            }, 1000);
+
+            // Fetch and display real-time astrological data
+            fetch('https://api.freeastrologyapi.com/forecast?sign=aries&apikey=SI4I4N5GJ32gRX5iSL1Qea4TqgDtIy8o9RyvDfxW')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('astrology-data').textContent = data.forecast;
+                })
+                .catch(error => console.error('Error fetching astrological data:', error));
+        });
+    </script>
+</body>
+</html>
