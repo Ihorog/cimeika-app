@@ -1,0 +1,34 @@
+{
+  "modules": [
+    {
+      "module": "notes",
+      "trigger": "unstructured_text",
+      "action": "activate",
+      "description": "Модуль для роботи з неструктурованим текстом та нотатками"
+    },
+    {
+      "module": "events",
+      "trigger": "event_planning",
+      "action": "activate",
+      "description": "Модуль ПоДія для планування подій та організації"
+    },
+    {
+      "module": "mood",
+      "trigger": "emotion_tracking",
+      "action": "activate",
+      "description": "Модуль Настрій для відстеження настрою та емоцій"
+    },
+    {
+      "module": "creativity",
+      "trigger": "creative_work",
+      "action": "activate",
+      "description": "Модуль Маля для дитячої та сімейної творчості"
+    }
+  ],
+  "trigger_keywords": {
+    "unstructured_text": ["нотатка", "записати", "текст", "замітка", "note", "write", "запис"],
+    "event_planning": ["подія", "зустріч", "планування", "календар", "event", "meeting", "plan", "планувати", "захід"],
+    "emotion_tracking": ["настрій", "емоція", "почуття", "mood", "emotion", "feeling", "почуваюся", "емоційний"],
+    "creative_work": ["творчість", "малювати", "креативність", "creative", "draw", "art", "намалювати", "малюнок"]
+  }
+}
