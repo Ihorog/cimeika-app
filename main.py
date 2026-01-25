@@ -5,6 +5,7 @@
 import json
 import logging
 import os
+import re
 from typing import List, Dict, Optional
 
 # Налаштування логування
@@ -13,6 +14,11 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Константи за замовчуванням
+DEFAULT_MODULE_NAME = "Unknown"
+DEFAULT_DESCRIPTION = "Немає опису"
+DEFAULT_ACTION = "activate"
 
 
 class IntentObserver:
@@ -32,6 +38,7 @@ class IntentObserver:
         """
         self.manifest_path = manifest_path
         self.modules = []
+        self.trigger_keywords = {}
         self.load_manifest()
         logger.info("[ФАКТ] IntentObserver ініціалізовано")
     
@@ -47,6 +54,15 @@ class IntentObserver:
             with open(self.manifest_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 self.modules = data.get('modules', [])
+                
+                # Завантаження ключових слів з manifest або використання значень за замовчуванням
+                self.trigger_keywords = data.get('trigger_keywords', {
+                    "unstructured_text": ["нотатка", "записати", "текст", "замітка", "note", "write", "запис"],
+                    "event_planning": ["подія", "зустріч", "планування", "календар", "event", "meeting", "plan", "планувати", "захід"],
+                    "emotion_tracking": ["настрій", "емоція", "почуття", "mood", "emotion", "feeling", "почуваюся", "емоційний"],
+                    "creative_work": ["творчість", "малювати", "креативність", "creative", "draw", "art", "намалювати", "малюнок"]
+                })
+                
                 logger.info(f"[ФАКТ] Завантажено {len(self.modules)} модулів з manifest.json")
         except json.JSONDecodeError as e:
             logger.error(f"[ФАКТ] Помилка парсингу JSON: {e}")
@@ -68,22 +84,27 @@ class IntentObserver:
         matching_modules = []
         user_input_lower = user_input.lower()
         
-        # Словник ключових слів для різних тригерів
-        trigger_keywords = {
-            "unstructured_text": ["нотатка", "записати", "текст", "замітка", "note", "write", "запис"],
-            "event_planning": ["подія", "зустріч", "планування", "календар", "event", "meeting", "plan", "планувати", "захід"],
-            "emotion_tracking": ["настрій", "емоція", "почуття", "mood", "emotion", "feeling", "почуваюся", "емоційний"],
-            "creative_work": ["творчість", "малювати", "креативність", "creative", "draw", "art", "намалювати", "малюнок"]
-        }
-        
         for module in self.modules:
             trigger = module.get('trigger', '')
-            keywords = trigger_keywords.get(trigger, [])
+            keywords = self.trigger_keywords.get(trigger, [])
             
             # Перевіряємо, чи містить запит користувача ключові слова тригера
-            if any(keyword in user_input_lower for keyword in keywords):
-                matching_modules.append(module)
-                logger.info(f"[МОДЕЛЬ] Знайдено відповідність: тригер '{trigger}' для модуля '{module.get('module')}'")
+            # Використовуємо гнучкий підхід для підтримки різних форм слів
+            for keyword in keywords:
+                # Для коротких ключових слів використовуємо word boundary
+                # Для довших - дозволяємо часткові збіги (префікси, суфікси)
+                if len(keyword) <= 4:
+                    pattern = r'\b' + re.escape(keyword) + r'\b'
+                    if re.search(pattern, user_input_lower):
+                        matching_modules.append(module)
+                        logger.info(f"[МОДЕЛЬ] Знайдено відповідність: тригер '{trigger}' для модуля '{module.get('module')}'")
+                        break
+                else:
+                    # Для довших слів використовуємо часткові збіги
+                    if keyword in user_input_lower:
+                        matching_modules.append(module)
+                        logger.info(f"[МОДЕЛЬ] Знайдено відповідність: тригер '{trigger}' для модуля '{module.get('module')}'")
+                        break
         
         return matching_modules
     
@@ -105,9 +126,9 @@ class IntentObserver:
         
         suggestions = []
         for module in matching_modules:
-            module_name = module.get('module', 'Unknown')
-            description = module.get('description', 'Немає опису')
-            action = module.get('action', 'activate')
+            module_name = module.get('module', DEFAULT_MODULE_NAME)
+            description = module.get('description', DEFAULT_DESCRIPTION)
+            action = module.get('action', DEFAULT_ACTION)
             
             suggestion = (
                 f"[НОВЕ] Виявлено необхідність активації модуля '{module_name}'.\n"
