@@ -1,0 +1,28 @@
+{
+  "modules": [
+    {
+      "module": "notes",
+      "trigger": "unstructured_text",
+      "action": "activate",
+      "description": "Модуль для роботи з неструктурованим текстом та нотатками"
+    },
+    {
+      "module": "events",
+      "trigger": "event_planning",
+      "action": "activate",
+      "description": "Модуль ПоДія для планування подій та організації"
+    },
+    {
+      "module": "mood",
+      "trigger": "emotion_tracking",
+      "action": "activate",
+      "description": "Модуль Настрій для відстеження настрою та емоцій"
+    },
+    {
+      "module": "creativity",
+      "trigger": "creative_work",
+      "action": "activate",
+      "description": "Модуль Маля для дитячої та сімейної творчості"
+    }
+  ]
+}
